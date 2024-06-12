@@ -12,3 +12,8 @@ proteins = ["Chicken", "Pork", "Beef", "Tofu"]
 class OrderRequest(BaseModel):
     broth: str
     protein: str
+    
+# Modelo para a resposta do pedido
+class OrderResponse(BaseModel):
+    order_id: str
+    message: str
