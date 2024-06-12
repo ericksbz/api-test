@@ -7,3 +7,8 @@ app = FastAPI()
 # Dados estáticos de exemplo para caldos e proteínas
 broths = ["Shoyu", "Miso", "Tonkotsu", "Shio"]
 proteins = ["Chicken", "Pork", "Beef", "Tofu"]
+
+# Modelo para o pedido
+class OrderRequest(BaseModel):
+    broth: str
+    protein: str
