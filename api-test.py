@@ -22,3 +22,8 @@ class OrderResponse(BaseModel):
 @app.get("/broths", response_model=list)
 async def get_broths():
     return broths
+
+# Endpoint para listar proteínas
+@app.get("/proteins", response_model=list)
+async def get_proteins():
+    return proteins
