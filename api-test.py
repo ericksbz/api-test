@@ -40,3 +40,19 @@ def generate_order_id(api_key: str) -> str:
         return response.json().get("order_id")
     else:
         raise HTTPException(status_code=response.status_code, detail="Failed to generate order ID")
+
+# Endpoint para processar o pedido
+@app.post("/order", response_model=OrderResponse)
+async def create_order(order_request: OrderRequest, x_api_key: str = Header(...)):
+    if order_request.broth not in broths:
+        raise HTTPException(status_code=400, detail="Invalid broth selection")
+    
+    if order_request.protein not in proteins:
+        raise HTTPException(status_code=400, detail="Invalid protein selection")
+    
+    order_id = generate_order_id(x_api_key)
+    
+    return OrderResponse(order_id=order_id, message="Order successfully created")
+
+# Comando para rodar a aplicação
+# uvicorn main:app --reload
