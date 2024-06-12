@@ -27,3 +27,16 @@ async def get_broths():
 @app.get("/proteins", response_model=list)
 async def get_proteins():
     return proteins
+
+# Função para gerar o ID do pedido
+def generate_order_id(api_key: str) -> str:
+    url = "https://api.tech.redventures.com.br/orders/generate-id"
+    headers = {
+        "x-api-key": api_key
+    }
+    response = requests.post(url, headers=headers)
+    
+    if response.status_code == 200:
+        return response.json().get("order_id")
+    else:
+        raise HTTPException(status_code=response.status_code, detail="Failed to generate order ID")
