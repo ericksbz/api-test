@@ -17,3 +17,8 @@ class OrderRequest(BaseModel):
 class OrderResponse(BaseModel):
     order_id: str
     message: str
+    
+# Endpoint para listar caldos
+@app.get("/broths", response_model=list)
+async def get_broths():
+    return broths
